@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="mainPage">
+		<div class="gradient">
+			<h3>Table Management</h3><br/> Table List
+			
+			
+			<h:form >
+		
+			<p:dataTable var="table" value="#{tableBean.tables}">
+   				 <p:column headerText="Type">
+       			 <h:outputText value="#{table.type}" />
+   				 </p:column>
+ 
+  				  <p:column headerText="Chairs'number">
+   			      <h:outputText value="#{table.numChair}" />
+  				  </p:column>
+  				  
+  				
+  				 
+  				  <p:column headerText="Update">
+   			      <h:commandButton value="update"  action="#{tableBean.InitUpadateTable(table)}" >
+   			      </h:commandButton>
+  				  </p:column>
+  				  
+ 				  <p:column headerText="Delete">
+   			      <h:commandButton action="#{tableBean.DeleteTable(table)}" value="delete" />
+  				  </p:column>
+  				  
+		</p:dataTable>
+		<h:commandButton action="#{tableBean.initialiser()}" value="Add" />
+		
+			</h:form>
+			
+		<hr></hr>
+		<h:form>
+			<h:panelGrid columns="3">
+				
+						<h:outputText value="Search by Type:" />
+						<h:inputText id="typeV" value="#{tableBean.type}"  validatorMessage="Table is required">
+						<f:validateRequired></f:validateRequired>
+						</h:inputText>
+						<br></br>
+						<h:commandButton  action="#{tableBean.findbyType()}" value="Search" />
+						<h:commandButton  action="#{tableBean.cancelSearch()}" value="Cancel" />
+			</h:panelGrid>
+		</h:form>
+		<hr></hr>	
+			
+			<h:form rendered="#{tableBean.visible}">
+			
+			<h:panelGrid columns="3">
+			
+					<h:outputText value="Type:" />
+					<h:inputText id="typeV" value="#{tableBean.newTable.type}"  validatorMessage="Type is required">
+					<f:validateRequired></f:validateRequired>
+					</h:inputText>
+				    <h:message  for="typeV" style="color:red" />
+					
+					
+					
+					<h:outputText value="chairs'number:" />
+					<h:inputText id="chairV" value="#{tableBean.newTable.numChair}" validatorMessage="numChair is required" >
+					<f:validateRequired></f:validateRequired>
+					</h:inputText>
+					<h:message  for="chairV" style="color:red" />
+	
+					
+					
+					<h:commandButton  rendered="#{tableBean.add}" action="#{tableBean.AddTable()}" value="Add" />
+					<h:commandButton  rendered="#{tableBean.update}" action="#{tableBean.updateTable()}" value="Update" />
+			</h:panelGrid>
+			
+			</h:form>
+			<br />
+			<br />
+			
+			
+			
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

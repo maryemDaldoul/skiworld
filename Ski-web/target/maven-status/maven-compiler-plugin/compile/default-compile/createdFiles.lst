@@ -1,0 +1,11 @@
+skiMbeans\StatBean.class
+skiMbeans\statBeanForResto.class
+skiMbeans\ReserverRestoBean.class
+WebServices\JaxRsActivator.class
+skiMbeans\RestaurantBean.class
+skiMbeans\TableBean.class
+WebServices\RestaurantRessources.class
+WebServices\MenuRessources.class
+skiMbeans\AuthenticiationBean.class
+skiMbeans\MenuBean.class
+skiMbeans\WorkerBean.class

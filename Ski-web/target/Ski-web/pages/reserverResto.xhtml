@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="mainPage">
+		<div class="gradient">
+			<h3>Rstaurnats reserve</h3><br/> Rstaurant List
+
+		<h:form>
+			<h:dataTable border="2" value="#{reserverRestoBean.restos}"
+				var="resto">
+				<f:facet name="header">Restaurants List</f:facet>
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					<h:outputText value="#{resto.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Location</f:facet>
+					<h:outputText value="#{resto.location}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Stars Number</f:facet>
+					<h:outputText value="#{resto.nbstars}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tables Number</f:facet>
+					<h:outputText value="#{resto.nbtables}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Reserve</f:facet>
+					<h:commandButton value="Select">
+						<f:setPropertyActionListener value="#{resto}"
+							target="#{reserverRestoBean.selectedResto}" />
+						<f:setPropertyActionListener value="true"
+							target="#{reserverRestoBean.renderReserver}" />
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+
+
+		</h:form>
+
+		 <h:form rendered="#{reserverRestoBean.renderReserver}">
+			  <h:panelGrid columns="2">
+				<h:outputLabel value="Restaurant" />
+				<h:outputText value="#{reserverRestoBean.selectedResto.name}" />
+				<!-- <h:outputLabel value="Date" />
+				<h:inputText value="#{reserverRestoBean.date}">
+					<f:convertDateTime pattern="dd-mm-yyyy" />
+				</h:inputText>
+				<h:outputLabel value="Start Hour" />
+				<h:inputText value="#{reserverRestoBean.startHour}">
+					<f:convertDateTime pattern="dd-mm-yyyy" />
+				</h:inputText>
+				<h:outputLabel value="End Hour" />
+				<h:inputText value="#{reserverRestoBean.endHour}">
+					<f:convertDateTime pattern="dd-mm-yyyy" />
+				</h:inputText>-->
+			  <h:commandButton action="#{reserverRestoBean.reserver()}" value="" outcome="/pages/reserverResto" />
+			</h:panelGrid>
+	 	</h:form>
+			
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

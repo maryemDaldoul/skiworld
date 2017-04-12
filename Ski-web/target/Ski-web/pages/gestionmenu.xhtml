@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="mainPage">
+		<div class="gradient">
+			<h3>menu Management</h3><br/> Menu List
+			
+			
+			<h:form >
+			
+			
+		
+			<p:dataTable var="menu" value="#{menuBean.menus}">
+   				 <p:column headerText="Price">
+       			 <h:outputText value="#{menu.price}" />
+   				 </p:column>
+ 
+			<p:column headerText="Description" filterBy="#{menu.description}" filterMatchMode="contains" >
+  				 <!--   <p:column headerText="Description">-->
+   			      <h:outputText value="#{menu.description}" />
+  				  </p:column>
+  				    				<!-- <p:column headerText="Restaurant">
+   			      <h:outputText value="#{menu.resto.name}" />
+  				  </p:column>-->
+  				 
+  				  <p:column headerText="Update">
+   			      <h:commandButton value="update"  action="#{menuBean.InitUpadateMenu(menu)}" >
+   			      </h:commandButton>
+  				  </p:column>
+  				  
+ 				  <p:column headerText="Delete">
+   			      <h:commandButton action="#{menuBean.DeleteMenu(menu)}" value="delete" />
+  				  </p:column>
+  				  
+		</p:dataTable>
+		<h:commandButton action="#{menuBean.initialiser()}" value="Add" />
+		
+			</h:form>
+			
+		<hr></hr>
+		<h:form>
+			<h:panelGrid columns="3">
+				
+						<h:outputText value="Search by Price:" />
+						<h:inputText id="priceV" value="#{menuBean.price}"  validatorMessage="Price is required">
+						<f:validateRequired></f:validateRequired>
+						</h:inputText>
+						<br></br>
+						<h:commandButton  action="#{menuBean.findbyPrice()}" value="Search" />
+						<h:commandButton  action="#{menuBean.cancelSearch()}" value="Cancel" />
+			</h:panelGrid>
+		</h:form>
+		<hr></hr>	
+			
+			<h:form rendered="#{menuBean.visible}">
+			
+			<h:panelGrid columns="3">
+			
+					<h:outputText value="Price:" />
+					<h:inputText id="priceV" value="#{menuBean.newMenu.price}"  validatorMessage="Price is required">
+					<f:validateRequired></f:validateRequired>
+					</h:inputText>
+				    <h:message  for="priceV" style="color:red" />
+					
+					
+					
+					<h:outputText value="Description:" />
+					<h:inputText id="descV" value="#{menuBean.newMenu.description}" validatorMessage="Description is required" >
+					<f:validateRequired></f:validateRequired>
+					</h:inputText>
+					<h:message  for="descV" style="color:red" />
+	
+					
+					
+					<h:commandButton  rendered="#{menuBean.add}" action="#{menuBean.AddMenu()}" value="Add" />
+					<h:commandButton  rendered="#{menuBean.update}" action="#{menuBean.updateMenu()}" value="Update" />
+			</h:panelGrid>
+			
+			</h:form>
+			<br />
+			<br />
+			
+			
+			
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
